@@ -19,7 +19,7 @@ services:
     volumes_from:
       - htdocs
     links:
-      - redis
+      - mysql
   htdocs:
     image: busybox
     stdin_open: true
