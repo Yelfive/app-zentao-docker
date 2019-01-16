@@ -1,7 +1,7 @@
 version: "2.0"
 services:
   nginx:
-    build: nginx
+    build: docker/nginx
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
@@ -13,7 +13,7 @@ services:
     links:
       - phpfpm
   phpfpm:
-    build: php
+    build: docker/php
     volumes:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
     volumes_from:
@@ -27,7 +27,7 @@ services:
     volumes:
       - ./zentao:/var/www/html
   mysql:
-    build: mysql
+    build: docker/mysql
     volumes:
         - ./docker/mysql/master.d:/etc/mysql/conf.d:ro
         - ./docker/mysql/data:/var/lib/mysql:rw
