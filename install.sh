@@ -1,6 +1,11 @@
-#!/usr/env bash
+#!/usr/bin/env bash
 
 set -e
+
+if [ `id -u` -gt 0 ]; then
+    echo must be root to run.
+    exit 1
+fi
 
 dir=$(cd `dirname $0`;pwd)
 
@@ -13,8 +18,8 @@ fi
 
 docker-compose up -d
 docker-compose exec phpfpm chown www-data:www-data /var/www/html
-decker-compose exec -u www-data phpfpm mkdir /tmp/session
+docker-compose exec -u www-data phpfpm mkdir /tmp/session
 
 echo -en "\033[32m"
-echo Installed successfully. Please visit \`/index.php\` to complete the installation
+echo Done here. Please visit \`/index.php\` to complete the installation
 echo -en "\033[0m"
